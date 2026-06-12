@@ -15,5 +15,5 @@
    secret admin key and must never go into a website.
    ============================================================ */
 
-window.SUPABASE_URL      = 'YOUR_SUPABASE_URL';
-window.SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+window.SUPABASE_URL      = 'https://jkdsyxhtpitdpjoqhngy.supabase.co';
+window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprZHN5eGh0cGl0ZHBqb3Fobmd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyNzQzMTUsImV4cCI6MjA5Njg1MDMxNX0.7rIw6gdOYIqTs2d9jgDie7HmaKv3qLpKc2T90X318nI';

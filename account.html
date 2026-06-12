@@ -174,14 +174,19 @@ function showMsg(text, kind){
 }
 
 // ---------- Tab switching (Log in / Register) ----------
-$('tabLogin').addEventListener('click',()=>{
+// When true, ignore auth changes so registering does NOT jump to the dashboard
+let suppressAuthRender = false;
+
+function showLogin(){
   $('tabLogin').classList.add('active'); $('tabRegister').classList.remove('active');
   $('loginForm').classList.remove('hidden'); $('registerForm').classList.add('hidden');
-});
-$('tabRegister').addEventListener('click',()=>{
+}
+function showRegister(){
   $('tabRegister').classList.add('active'); $('tabLogin').classList.remove('active');
   $('registerForm').classList.remove('hidden'); $('loginForm').classList.add('hidden');
-});
+}
+$('tabLogin').addEventListener('click', showLogin);
+$('tabRegister').addEventListener('click', showRegister);
 
 if(!ready){
   $('setupWarn').classList.remove('hidden');
@@ -201,14 +206,23 @@ $('googleBtn').addEventListener('click', async ()=>{
 $('registerForm').addEventListener('submit', async e=>{
   e.preventDefault();
   if(!supa){ showMsg('Not connected yet — owner must add Supabase keys (see README).'); return; }
+  suppressAuthRender = true;                   // don't auto-open the dashboard during sign-up
   const { data, error } = await supa.auth.signUp({
     email: $('regEmail').value,
     password: $('regPass').value,
     options: { data: { full_name: $('regName').value } }
   });
-  if(error){ showMsg(error.message); return; }
+  if(error){ suppressAuthRender = false; showMsg(error.message); return; }
+  // Make sure the new user is NOT auto-logged-in — they must log in themselves
+  await supa.auth.signOut();
+  suppressAuthRender = false;
+  // Send them to the LOGIN tab, with email prefilled for convenience
+  $('loginEmail').value = $('regEmail').value;
+  $('loginPass').value = '';
+  $('registerForm').reset();
+  showLogin();
   if(data.session){
-    render();                                  // email confirmation is OFF — logged in straight away
+    showMsg('Account created! Please log in to continue.', 'ok');
   } else {
     showMsg('Account created! Please check your email to confirm, then log in.', 'ok');
   }
@@ -274,7 +288,7 @@ async function render(){
 }
 
 // React to login/logout (incl. returning from Google)
-if(supa) supa.auth.onAuthStateChange(()=>render());
+if(supa) supa.auth.onAuthStateChange(()=>{ if(suppressAuthRender) return; render(); });
 render();
 </script>
 </body>

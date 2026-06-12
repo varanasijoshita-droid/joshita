@@ -119,19 +119,19 @@ nav.scrolled{background:rgba(250,247,240,.96);backdrop-filter:blur(12px);box-sha
 .menu{background:var(--bone)}
 .acts{margin-top:56px}
 .act{border-bottom:1px solid rgba(26,22,20,.14)}
-.act-head{display:flex;align-items:center;justify-content:space-between;padding:30px 8px;cursor:pointer;user-select:none;transition:background .25s;width:100%;background:none;border:none;font:inherit;color:inherit;text-align:left}
-.act-head:focus-visible,.blog-card:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px}
-.act-head:hover{background:rgba(181,83,45,.05)}
-.act-head h3{font-size:clamp(22px,3vw,30px);display:flex;align-items:baseline;gap:18px}
+.act-head{display:flex;align-items:center;justify-content:space-between;padding:30px 8px 18px}
+.act-head h3{font-size:clamp(22px,3vw,30px);display:flex;align-items:baseline;gap:18px;position:relative;padding-bottom:12px}
+.act-head h3::after{content:'';position:absolute;left:0;bottom:0;height:2.5px;width:100%;background:var(--terracotta);transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.22,1,.36,1) .15s}
+.act.visible .act-head h3::after{transform:scaleX(1)}
 .act-roman{font-style:italic;color:var(--terracotta);font-size:.75em}
 .act-tag{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-soft);font-family:var(--sans)}
-.act-toggle{font-size:26px;color:var(--terracotta);font-family:var(--serif);transition:transform .3s;flex-shrink:0;margin-left:20px}
-.act.open .act-toggle{transform:rotate(45deg)}
-.act-body{max-height:0;overflow:hidden;transition:max-height .5s ease}
-.act.open .act-body{max-height:600px}
+.act-body{overflow:visible}
 .act-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 40px;padding:6px 8px 36px}
-.act-items li{list-style:none;font-size:15.5px;color:var(--ink-soft);padding-left:22px;position:relative}
+.act-items li{list-style:none;font-size:15.5px;color:var(--ink-soft);padding-left:22px;position:relative;transition:color .25s}
 .act-items li::before{content:'·';position:absolute;left:0;color:var(--terracotta);font-weight:700;font-size:22px;line-height:1.1}
+.act-items li::after{content:'';position:absolute;left:22px;bottom:-2px;height:1.5px;width:0;background:var(--terracotta);transition:width .35s ease}
+.act-items li:hover{color:var(--ink)}
+.act-items li:hover::after{width:calc(100% - 22px)}
 .act-items li em{color:var(--terracotta);font-size:13px;font-style:italic;margin-left:6px}
 .menu-note{margin-top:32px;font-size:13.5px;color:var(--ink-soft);font-style:italic}
 .menu-illus{display:flex;justify-content:center;gap:56px;margin-top:56px;flex-wrap:wrap;align-items:flex-end}
@@ -173,6 +173,21 @@ nav.scrolled{background:rgba(250,247,240,.96);backdrop-filter:blur(12px);box-sha
 .tier.featured ul li{color:rgba(244,239,230,.8);border-color:rgba(244,239,230,.12)}
 .tier ul li::before{content:'—';position:absolute;left:0;color:var(--terracotta)}
 .tier.featured ul li::before{color:var(--sand)}
+.tier-perfect{margin-top:18px;padding:14px 16px;background:rgba(181,83,45,.06);border-radius:6px}
+.tier.featured .tier-perfect{background:rgba(244,239,230,.07)}
+.tier-perfect h5{font-family:var(--sans);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--terracotta);font-weight:600;margin-bottom:6px}
+.tier.featured .tier-perfect h5{color:var(--sand)}
+.tier-perfect p{font-size:13.5px;color:var(--ink-soft);line-height:1.6}
+.tier.featured .tier-perfect p{color:rgba(244,239,230,.8)}
+.found-list{list-style:none;margin-top:14px}
+.found-list li{font-size:15px;color:rgba(26,22,20,.85);padding:4px 0}
+.found-list li::before{content:'✔';color:var(--terracotta-deep);margin-right:10px;font-weight:600}
+.policy-card{margin-top:40px;background:rgba(244,239,230,.04);border:1px solid rgba(244,239,230,.15);border-radius:8px;padding:36px 44px}
+.policy-card h3{color:#fff;font-size:23px;margin-bottom:12px}
+.policy-card p{color:rgba(244,239,230,.75);font-size:15px;margin-bottom:14px}
+.policy-card ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 32px;margin-bottom:14px}
+.policy-card li{font-size:14.5px;color:rgba(244,239,230,.75);padding-left:20px;position:relative}
+.policy-card li::before{content:'·';position:absolute;left:0;color:var(--sand);font-weight:700;font-size:22px;line-height:1}
 .tier .btn{text-align:center}
 .bespoke-bar{margin-top:28px;background:#fff;border:1px solid rgba(26,22,20,.1);border-radius:8px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .bespoke-bar h3{font-size:24px}
@@ -320,7 +335,7 @@ footer .logo-word{color:var(--bone)}
     <ul class="nav-links" id="navLinks">
       <li><a href="#story">Our Story</a></li>
       <li><a href="#menu">The Menu</a></li>
-      <li><a href="#byor">BYOR</a></li>
+      <li><a href="#byor">Heritage Recipe</a></li>
       <li><a href="#packages">Experiences</a></li>
       <li><a href="#blog">Journal</a></li>
       <li><a href="#faq">FAQs</a></li>
@@ -344,9 +359,9 @@ footer .logo-word{color:var(--bone)}
         <a href="#menu" class="btn btn-light">Explore The Menu</a>
       </div>
       <div class="hero-meta">
-        <div><strong>15–50</strong>Guests per gathering</div>
-        <div><strong>5 Acts</strong>Live culinary journey</div>
-        <div><strong>BYOR</strong>Your recipe, cooked live</div>
+        <div><strong>15–50 Guests</strong>Intimate gatherings</div>
+        <div><strong>Live Cooking</strong>Prepared fresh on-site</div>
+        <div><strong>Heritage Recipes</strong>Your family dish, reimagined</div>
       </div>
     </div>
     <div class="hero-scene" id="heroScene">
@@ -416,7 +431,7 @@ footer .logo-word{color:var(--bone)}
       </svg>
       <div class="hero-chip chip1"><span class="dot"></span><div><strong>Live counter open</strong>Ghee roast dosa · flame on</div></div>
       <div class="hero-chip chip2"><span class="dot"></span><div><strong>Booked: Sat, 7 PM</strong>Birthday · 30 guests · Kompally</div></div>
-      <div class="hero-chip chip3"><span class="dot"></span><div><strong>BYOR confirmed</strong>"Amamma's chicken pulao"</div></div>
+      <div class="hero-chip chip3"><span class="dot"></span><div><strong>Heritage recipe confirmed</strong>"Amamma's chicken pulao"</div></div>
     </div>
   </div>
 </header>
@@ -468,7 +483,7 @@ footer .logo-word{color:var(--bone)}
     <p class="section-sub">From booking to the last bite, we've made it effortless.</p>
     <div class="steps">
       <div class="step reveal card3d"><span class="step-num">01</span><h3>Choose your experience</h3><p>Pick the package that fits your gathering — from an intimate dinner for 20 to a celebration for 50. Share your date and your dietary preferences.</p></div>
-      <div class="step reveal card3d"><span class="step-num">02</span><h3>We craft your menu</h3><p>Our chef curates your courses from the ARIVA menu. Adding a family recipe (BYOR)? Share it at booking and our chef practises it before your event.</p></div>
+      <div class="step reveal card3d"><span class="step-num">02</span><h3>We craft your menu</h3><p>Our chef curates your courses from the ARIVA menu. Adding a Heritage Recipe? Share it at booking and our chef practises it before your event.</p></div>
       <div class="step reveal card3d"><span class="step-num">03</span><h3>We arrive &amp; cook live</h3><p>On event day, the ARIVA trailer arrives 30–45 minutes early to set up. Then every course is cooked fresh in front of your guests. You host. We handle the rest.</p></div>
     </div>
     <div class="how-note reveal">
@@ -482,36 +497,36 @@ footer .logo-word{color:var(--bone)}
 <section class="menu" id="menu">
   <div class="wrap">
     <span class="eyebrow">The ARIVA Menu</span>
-    <h2 class="section-title">A five-act live journey</h2>
+    <h2 class="section-title">The ARIVA Culinary Journey</h2>
     <p class="section-sub">Hyderabad's favourites with a premium touch — every dish cooked live, every dish something your guests already love. Nothing frozen, nothing reheated, nothing pretentious.</p>
     <div class="acts">
       <div class="act open">
-        <button class="act-head" type="button" aria-expanded="true" aria-controls="act-body-1"><h3><span class="act-roman">Act I</span> The Welcome</h3><span class="act-tag">Starters &amp; Coolers</span><span class="act-toggle">+</span></button>
-        <div class="act-body" id="act-body-1"><ul class="act-items">
+        <div class="act-head"><h3><span class="act-roman">01</span> Welcome</h3><span class="act-tag">Starters &amp; Coolers</span></div>
+        <div class="act-body"><ul class="act-items">
           <li>Punugulu with allam chutney <em>fried live</em></li><li>Mirchi bajji <em>fried live</em></li><li>Paneer 65</li><li>Chicken 65</li><li>Fresh fruit coolers &amp; mocktail counter</li>
         </ul></div>
       </div>
       <div class="act">
-        <button class="act-head" type="button" aria-expanded="false" aria-controls="act-body-2"><h3><span class="act-roman">Act II</span> The Fire</h3><span class="act-tag">Tandoor &amp; Grill</span><span class="act-toggle">+</span></button>
-        <div class="act-body" id="act-body-2"><ul class="act-items">
+        <div class="act-head"><h3><span class="act-roman">02</span> Small Plates</h3><span class="act-tag">Tandoor &amp; Grill</span></div>
+        <div class="act-body"><ul class="act-items">
           <li>Tandoori chicken</li><li>Chicken malai tikka</li><li>Paneer tikka</li><li>Veg seekh kebab</li><li>Masala bhutta <em>charcoal grilled</em></li>
         </ul></div>
       </div>
       <div class="act">
-        <button class="act-head" type="button" aria-expanded="false" aria-controls="act-body-3"><h3><span class="act-roman">Act III</span> The Wok</h3><span class="act-tag">Live Indo-Chinese</span><span class="act-toggle">+</span></button>
-        <div class="act-body" id="act-body-3"><ul class="act-items">
+        <div class="act-head"><h3><span class="act-roman">03</span> Live Station Experience</h3><span class="act-tag">Live Indo-Chinese</span></div>
+        <div class="act-body"><ul class="act-items">
           <li>Hakka noodles — veg / chicken <em>tossed live</em></li><li>Schezwan fried rice</li><li>Chilli paneer</li><li>Veg manchurian</li><li>Steamed momos <em>live steamer</em></li>
         </ul></div>
       </div>
       <div class="act">
-        <button class="act-head" type="button" aria-expanded="false" aria-controls="act-body-4"><h3><span class="act-roman">Act IV</span> The Hearth</h3><span class="act-tag">Mains</span><span class="act-toggle">+</span></button>
-        <div class="act-body" id="act-body-4"><ul class="act-items">
-          <li>Hyderabadi chicken dum biryani</li><li>Veg dum biryani</li><li>Butter chicken with butter naan</li><li>Paneer butter masala</li><li>Ghee karam dosa <em>live tawa</em></li><li><strong>Your Family Recipe</strong> — see BYOR below</li>
+        <div class="act-head"><h3><span class="act-roman">04</span> Signature Mains</h3><span class="act-tag">Mains</span></div>
+        <div class="act-body"><ul class="act-items">
+          <li>Hyderabadi chicken dum biryani</li><li>Veg dum biryani</li><li>Butter chicken with butter naan</li><li>Paneer butter masala</li><li>Ghee karam dosa <em>live tawa</em></li><li><strong>Your Family Recipe</strong> — see Heritage Recipe Experience below</li>
         </ul></div>
       </div>
       <div class="act">
-        <button class="act-head" type="button" aria-expanded="false" aria-controls="act-body-5"><h3><span class="act-roman">Act V</span> The Finale</h3><span class="act-tag">Live Desserts</span><span class="act-toggle">+</span></button>
-        <div class="act-body" id="act-body-5"><ul class="act-items">
+        <div class="act-head"><h3><span class="act-roman">05</span> Sweet Finale</h3><span class="act-tag">Live Desserts</span></div>
+        <div class="act-body"><ul class="act-items">
           <li>Jalebi with rabri <em>piped &amp; fried live</em></li><li>Gulab jamun</li><li>Double ka meetha</li><li>Ice-cream rolls <em>rolled live</em></li><li>Kulfi &amp; cutting chai closer</li>
         </ul></div>
       </div>
@@ -530,10 +545,10 @@ footer .logo-word{color:var(--bone)}
 <section class="byor" id="byor">
   <div class="wrap byor-grid">
     <div class="reveal">
-      <span class="eyebrow">Bring Your Own Recipe</span>
-      <h2>Your family recipe.<br><em>Our live kitchen.</em></h2>
-      <p>Every family has one dish that means home — grandmother's pulao, an aunt's korma, a mother's halwa. With BYOR, our chef learns <strong>your</strong> recipe and cooks it live at your gathering.</p>
-      <p>We don't just cook for you. We cook <em>your</em> food. No one else in Hyderabad does this.</p>
+      <span class="eyebrow">Your Family Dish, Reimagined</span>
+      <h2>Heritage Recipe<br><em>Experience</em></h2>
+      <p>Share a cherished family recipe and our chef will recreate it live at your gathering.</p>
+      <p>Every family has one dish that means home — grandmother's pulao, an aunt's korma, a mother's halwa. We don't just cook for you. We cook <em>your</em> food. No one else in Hyderabad does this.</p>
     </div>
     <ol class="byor-steps reveal">
       <li><strong>Share the recipe at booking</strong>Written or even a voice note — at least 2 days before your event, so we can do it justice.</li>
@@ -560,10 +575,11 @@ footer .logo-word{color:var(--bone)}
           <li>5 live-cooked courses</li>
           <li>1 live station + chef &amp; helper</li>
           <li>Fresh coolers &amp; mocktail counter</li>
-          <li>Add your family recipe (BYOR) +₹2,500</li>
+          <li>Add a Heritage Recipe +₹2,500</li>
           <li>Full setup, service &amp; cleanup</li>
         </ul>
-        <a href="#book" class="btn btn-outline" onclick="setPkg('Intimate')">Enquire</a>
+        <div class="tier-perfect"><h5>Perfect for</h5><p>High tea · Kitty parties · Family gatherings</p></div>
+        <a href="#book" class="btn btn-outline" onclick="setPkg('Intimate')" style="margin-top:24px">Enquire</a>
       </div>
       <div class="tier featured reveal card3d">
         <span class="tier-badge">Most Loved</span>
@@ -572,11 +588,12 @@ footer .logo-word{color:var(--bone)}
         <ul>
           <li>7 live-cooked courses</li>
           <li>2 live stations + chef team</li>
-          <li>1 family recipe (BYOR) included</li>
+          <li>1 Heritage Recipe included</li>
           <li>Live dessert counter</li>
           <li>Full setup, service &amp; cleanup</li>
         </ul>
-        <a href="#book" class="btn btn-primary" onclick="setPkg('Curated')">Enquire</a>
+        <div class="tier-perfect"><h5>Perfect for</h5><p>Birthdays · Anniversaries · House parties</p></div>
+        <a href="#book" class="btn btn-primary" onclick="setPkg('Curated')" style="margin-top:24px">Enquire</a>
       </div>
       <div class="tier reveal card3d">
         <h3>Signature</h3><div class="tier-guests">Up to 50 guests</div>
@@ -584,24 +601,25 @@ footer .logo-word{color:var(--bone)}
         <ul>
           <li>9 live-cooked courses</li>
           <li>3 live stations + chef brigade</li>
-          <li>2 family recipes (BYOR) included</li>
+          <li>2 Heritage Recipes included</li>
           <li>Tandoor, wok &amp; live dessert counters</li>
           <li>Full setup, service &amp; cleanup</li>
         </ul>
-        <a href="#book" class="btn btn-outline" onclick="setPkg('Signature')">Enquire</a>
+        <div class="tier-perfect"><h5>Perfect for</h5><p>Milestone celebrations · Corporate gatherings · Luxury private events</p></div>
+        <a href="#book" class="btn btn-outline" onclick="setPkg('Signature')" style="margin-top:24px">Enquire</a>
       </div>
     </div>
     <div class="bespoke-bar reveal">
       <div>
-        <h3>Bespoke — let's talk</h3>
-        <p>Larger guest lists, themed menus, multi-day celebrations, or something nobody's done before. Designed entirely around you.</p>
+        <h3>Bespoke Experiences</h3>
+        <p>Every celebration is different. Whether you're planning a themed evening, a milestone celebration, a multi-day family gathering, or a completely custom dining experience, our team will create a menu and service format tailored exclusively for your event.</p>
       </div>
       <a href="#book" class="btn btn-outline" onclick="setPkg('Bespoke')">Start a Conversation</a>
     </div>
     <div class="addons reveal">
       <h4>Transparent add-ons</h4>
       <div class="addon-chips">
-        <span>Extra hour · ₹2,500</span><span>Extra live station · ₹4,000</span><span>BYOR on Intimate · ₹2,500</span><span>Beyond 12 km · ₹50/km</span><span>Saturday peak · +10%</span>
+        <span>Extra hour · ₹2,500</span><span>Extra live station · ₹4,000</span><span>Heritage Recipe on Intimate · ₹2,500</span><span>Beyond 12 km · ₹50/km</span><span>Saturday peak · +10%</span>
       </div>
     </div>
   </div>
@@ -612,8 +630,14 @@ footer .logo-word{color:var(--bone)}
   <div class="wrap founding-inner">
     <div>
       <span class="eyebrow">Limited Launch Offer</span>
-      <h2>The <em>Founding Twenty</em></h2>
-      <p>Our first 20 gatherings — ever — at a special founding rate of ₹15,999 flat (up to 20 guests). Founding hosts get priority dates for life. Once 20 are booked, this rate is gone forever.</p>
+      <h2>Founding Guest <em>Privileges</em></h2>
+      <p>Be among ARIVA's first 20 hosts and enjoy:</p>
+      <ul class="found-list">
+        <li>Special introductory pricing — ₹15,999 flat (up to 20 guests)</li>
+        <li>Complimentary menu consultation</li>
+        <li>Priority booking access</li>
+        <li>Early access to future ARIVA experiences</li>
+      </ul>
     </div>
     <a href="#book" class="btn" onclick="setPkg('Founding Twenty')">Claim a Founding Spot</a>
   </div>
@@ -627,11 +651,11 @@ footer .logo-word{color:var(--bone)}
       <p>"Fresh food, cooked in front of you, is the most honest luxury there is."</p>
     </div>
     <div class="about-text reveal">
-      <span class="eyebrow">The Founder</span>
-      <h2 class="section-title">Hi, I'm Joshita</h2>
-      <p>I'm 23, born and raised in Hyderabad, in a home where food was never just food — it was the reason everyone showed up, stayed late, and came back. The dishes people still talk about were never ordered in. They were cooked fresh, right there, while we watched.</p>
-      <p>I started ARIVA to bring that feeling to every celebration in this city. A live kitchen at your doorstep. A chef who treats your gathering like their own. And with BYOR, even your own family recipes — cooked live, the way they deserve to be.</p>
-      <p>My vision is simple: make live cooking the new standard for small celebrations — starting in Hyderabad, and one day, everywhere.</p>
+      <span class="eyebrow">From the Founder</span>
+      <h2 class="section-title">Why ARIVA exists</h2>
+      <p>ARIVA was created from a simple belief: <strong>hosts should spend time with their guests, not worry about food logistics.</strong></p>
+      <p>By combining fresh live cooking with a mobile kitchen experience, ARIVA brings restaurant-quality hospitality directly to intimate gatherings and celebrations.</p>
+      <p>Our mission is to make every gathering feel effortless, memorable, and truly personal.</p>
       <div class="about-sign">Joshita Varanasi</div>
       <div class="about-role">Founder, ARIVA</div>
     </div>
@@ -674,9 +698,9 @@ footer .logo-word{color:var(--bone)}
           <svg width="120" height="100" viewBox="0 0 120 100" fill="none"><path d="M30 70 q30 -16 60 0 l-5 12 q-25 10 -50 0 Z" fill="#93421F"/><ellipse cx="60" cy="70" rx="30" ry="8" fill="#1A1614" opacity=".25"/><path d="M48 52 q-5 -8 0 -15" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M62 48 q-5 -9 0 -16" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M74 52 q-4 -7 0 -13" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/></svg>
         </div>
         <div class="blog-body">
-          <div class="blog-tagline">BYOR Stories</div>
+          <div class="blog-tagline">Heritage Recipes</div>
           <h3>The dish your grandmother never wrote down</h3>
-          <p>Every family has one recipe that lives in someone's hands, not in a book. BYOR exists so it can be celebrated, not just remembered.</p>
+          <p>Every family has one recipe that lives in someone's hands, not in a book. The Heritage Recipe Experience exists so it can be celebrated, not just remembered.</p>
           <span class="blog-more">Read →</span>
         </div>
       </article>
@@ -704,9 +728,9 @@ footer .logo-word{color:var(--bone)}
       <div class="faq-item"><button class="faq-q">How early do you arrive, and how much space do you need?</button><div class="faq-a"><p>Our team arrives 30–45 minutes before your event to set up, so the counter is open and flames are on before your first guest walks in. Space-wise, we need roughly two car-lengths for the trailer — driveways, gated community lawns, and open compounds all work. For gated communities, we coordinate with your RWA for access.</p></div></div>
       <div class="faq-item"><button class="faq-q">Is the food safe and hygienic?</button><div class="faq-a"><p>Hygiene is non-negotiable for us. Ingredients are sourced fresh per event, prepped under strict food-safety protocols, and cooked live in front of you. Nothing is reheated — you literally watch your food being made.</p></div></div>
       <div class="faq-item"><button class="faq-q">Can you handle vegetarian or allergy requirements?</button><div class="faq-a"><p>Absolutely. Every menu is adapted to your guests — full vegetarian menus, allergy exclusions, and spice-level adjustments. You tell us once at booking, and the chef plans around it.</p></div></div>
-      <div class="faq-item"><button class="faq-q">How does Bring Your Own Recipe (BYOR) work?</button><div class="faq-a"><p>Share your family recipe when you book — written or as a voice note — at least 2 days before your event. Our chef calls you the same day to understand it properly, does a practice cook the day before, and then cooks it live at your gathering. Included in Curated and Signature; +₹2,500 on Intimate.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How does the Heritage Recipe Experience work?</button><div class="faq-a"><p>Share your family recipe when you book — written or as a voice note — at least 2 days before your event. Our chef calls you the same day to understand it properly, does a practice cook the day before, and then cooks it live at your gathering. Included in Curated and Signature; +₹2,500 on Intimate.</p></div></div>
       <div class="faq-item"><button class="faq-q">Which areas do you serve?</button><div class="faq-a"><p>All of Hyderabad. Travel is included within 12 km of our base; beyond that, a transparent ₹50/km applies. Enter your pincode in the booking form and we'll confirm instantly.</p></div></div>
-      <div class="faq-item"><button class="faq-q">How far in advance should I book?</button><div class="faq-a"><p>We take a limited number of gatherings each weekend so every event gets full attention. We recommend booking 1–2 weeks ahead — earlier for Saturdays and festival dates. Adding a BYOR dish? Give us at least 2 days.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How far in advance should I book?</button><div class="faq-a"><p>We take a limited number of gatherings each weekend so every event gets full attention. We recommend booking 1–2 weeks ahead — earlier for Saturdays and festival dates. Adding a Heritage Recipe? Give us at least 2 days.</p></div></div>
       <div class="faq-item"><button class="faq-q">What if it rains?</button><div class="faq-a"><p>Our trailer works under covered areas — porticos, covered driveways, clubhouse entrances. If weather forces a change, we'll work with you to shift the setup or reschedule. During monsoon months we plan a covered fallback with you in advance.</p></div></div>
     </div>
   </div>
@@ -753,8 +777,19 @@ footer .logo-word{color:var(--bone)}
         </div>
         <div class="field"><label for="fnotes">Tell us about your event</label><textarea id="fnotes" placeholder="Occasion, dietary preferences, allergies, a family recipe you'd love cooked live…"></textarea></div>
         <button type="submit" class="btn btn-primary" style="width:100%">Send Enquiry on WhatsApp</button>
-        <p class="form-note">Your enquiry opens in WhatsApp — nothing is charged now. We confirm availability first, then a ₹2,000 advance secures your date.</p>
+        <p class="form-note">Your enquiry opens in WhatsApp — nothing is charged now.</p>
       </form>
+    </div>
+    <div class="policy-card">
+      <h3>Booking Policy</h3>
+      <p>A refundable booking advance of <strong style="color:var(--bone)">₹2,000</strong> is required to reserve your date. This allows us to:</p>
+      <ul>
+        <li>Block the event slot</li>
+        <li>Begin menu planning</li>
+        <li>Procure fresh ingredients</li>
+        <li>Allocate our kitchen and service team</li>
+      </ul>
+      <p>The remaining balance is payable before the event.</p>
     </div>
   </div>
 </section>
@@ -773,7 +808,7 @@ footer .logo-word{color:var(--bone)}
       <ul class="foot-links">
         <li><a href="#story">Our Story</a></li>
         <li><a href="#menu">The Menu</a></li>
-        <li><a href="#byor">BYOR</a></li>
+        <li><a href="#byor">Heritage Recipe</a></li>
         <li><a href="#packages">Experiences</a></li>
         <li><a href="#blog">Journal</a></li>
         <li><a href="#faq">FAQs</a></li>
@@ -805,11 +840,9 @@ const ham=document.getElementById('hamburger'),links=document.getElementById('na
 ham.addEventListener('click',()=>{links.classList.toggle('openm');ham.textContent=links.classList.contains('openm')?'✕':'☰'});
 links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('openm');ham.textContent='☰'}));
 
-// Menu accordions
-document.querySelectorAll('.act-head').forEach(h=>h.addEventListener('click',()=>{
-  const open=h.parentElement.classList.toggle('open');
-  h.setAttribute('aria-expanded',open);
-}));
+// Menu underline animation — acts get .visible when scrolled into view
+const actObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');actObs.unobserve(e.target)}}),{threshold:.25});
+document.querySelectorAll('.act').forEach(a=>actObs.observe(a));
 
 // FAQ accordions
 document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>{
@@ -869,10 +902,10 @@ const posts={
     <p>And in India, nothing moves a trailer better than a tractor. It handles narrow colony roads, gravel farm lanes, and gated community ramps that would defeat a truck. It parks precisely. It's easy to maintain. And — let's be honest — <strong>it makes an entrance.</strong></p>
     <p>There's also something quietly right about it. ARIVA comes from a family that knows agriculture, where the tractor is the most honest machine there is — it does real work, every day, without fuss. Our kitchen rides in on that same spirit: no pretension, just craft.</p>
     <p>When you book ARIVA, the tractor pulls the trailer to your gate 30–45 minutes early. By the time your first guest arrives, the counter is open, the flame is on, and the trailer looks like it was always meant to be parked right there.</p>`},
-  post3:{tag:'BYOR Stories',title:'The dish your grandmother never wrote down',body:`
+  post3:{tag:'Heritage Recipes',title:'The dish your grandmother never wrote down',body:`
     <p>Every family in Hyderabad has one. The pulao only one aunt gets right. The kodi kura your grandmother made by instinct — "konchem konchem" was her only measurement. The halwa that shows up once a year and disappears in minutes.</p>
     <p>These recipes are rarely written down. They live in someone's hands, in the smell of a kitchen, in memory. And at most celebrations, they're missing — because the host is too busy hosting to cook, and no caterer offers to make <em>your</em> food.</p>
-    <p><strong>That's why BYOR exists.</strong> Bring Your Own Recipe is simple: when you book, share the recipe — written, or just a voice note of you (or amma) explaining it. Our chef calls you the same day to catch the details that never make it to paper. The day before your event, we do a practice cook. And on the night, your family's dish is cooked live, in front of the people it means the most to.</p>
+    <p><strong>That's why the Heritage Recipe Experience exists.</strong> It's simple: when you book, share the recipe — written, or just a voice note of you (or amma) explaining it. Our chef calls you the same day to catch the details that never make it to paper. The day before your event, we do a practice cook. And on the night, your family's dish is cooked live, in front of the people it means the most to.</p>
     <p>We ask for the recipe at least two days ahead — great dishes deserve a rehearsal. And we'll be honest with you: if a dish can't be done justice live, we'll tell you upfront rather than serve a weak version of something precious.</p>
     <p>No one else in Hyderabad does this. We think every city should.</p>`}
 };
