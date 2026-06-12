@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ariva. — Account</title>
+<meta name="description" content="Sign in to your ARIVA account to send and track your live-kitchen booking enquiries.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23B5532D'/%3E%3Cpath d='M50 16 L76 78 Q50 66 24 78 Z' fill='none' stroke='%23F4EFE6' stroke-width='9' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1A1614;--terracotta:#B5532D;--terracotta-deep:#93421F;
+  --bone:#F4EFE6;--bone-light:#FAF7F0;--sand:#D8A47F;--ink-soft:#5C534D;--white:#FFFFFF;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);color:var(--ink);background:var(--bone-light);line-height:1.7;font-weight:300;font-size:16px;min-height:100vh;display:flex;flex-direction:column}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.2}
+a{color:inherit}
+.logo{display:inline-flex;align-items:center;gap:10px}
+.logo-mark{width:30px;height:30px;flex-shrink:0}
+.logo-word{font-family:var(--sans);font-weight:500;font-size:25px;letter-spacing:1px;color:var(--ink);line-height:1}
+.logo-word::after{content:'.';color:var(--terracotta);font-weight:600}
+.topbar{padding:22px 24px;display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto;width:100%}
+.topbar a.back{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft)}
+.topbar a.back:hover{color:var(--terracotta)}
+.wrap{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:40px 20px 80px}
+.card{background:#fff;border:1px solid rgba(26,22,20,.1);border-radius:10px;width:100%;max-width:480px;padding:44px 40px;box-shadow:0 24px 60px rgba(26,22,20,.10)}
+.card.wide{max-width:640px}
+.eyebrow{font-size:12px;letter-spacing:3.5px;text-transform:uppercase;color:var(--terracotta);font-weight:500;display:block;margin-bottom:14px}
+.card h1{font-size:34px;margin-bottom:8px}
+.card .sub{color:var(--ink-soft);font-size:15px;margin-bottom:28px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--terracotta-deep);margin-bottom:8px;font-weight:500}
+.field input{width:100%;background:#fff;border:1px solid rgba(26,22,20,.2);border-radius:3px;padding:13px 15px;color:var(--ink);font-family:var(--sans);font-size:15px;font-weight:300;transition:border .2s}
+.field input:focus{outline:none;border-color:var(--terracotta)}
+.btn{display:inline-block;width:100%;text-align:center;padding:14px 20px;border-radius:3px;font-family:var(--sans);font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:500;cursor:pointer;border:1px solid transparent;transition:all .25s}
+.btn-primary{background:var(--terracotta);color:#fff}
+.btn-primary:hover{background:var(--terracotta-deep)}
+.btn-outline{background:#fff;border-color:rgba(26,22,20,.25);color:var(--ink)}
+.btn-outline:hover{border-color:var(--ink)}
+.btn-ink{background:var(--ink);color:var(--bone)}
+.btn-ink:hover{background:#000}
+.btn-google{background:#fff;border:1px solid rgba(26,22,20,.22);color:var(--ink);display:flex;align-items:center;justify-content:center;gap:12px}
+.btn-google:hover{border-color:var(--ink);box-shadow:0 6px 18px rgba(26,22,20,.08)}
+.btn-google svg{width:18px;height:18px;flex-shrink:0}
+.divider{display:flex;align-items:center;gap:14px;margin:24px 0;color:var(--ink-soft);font-size:12px;letter-spacing:2px;text-transform:uppercase}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(26,22,20,.14)}
+.tabs{display:flex;gap:6px;margin-bottom:26px;background:var(--bone);padding:5px;border-radius:6px}
+.tabs button{flex:1;padding:11px;border:none;background:none;border-radius:4px;cursor:pointer;font-family:var(--sans);font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:500;color:var(--ink-soft);transition:all .2s}
+.tabs button.active{background:#fff;color:var(--ink);box-shadow:0 2px 6px rgba(26,22,20,.08)}
+.msg{font-size:13.5px;border-radius:4px;padding:12px 14px;margin-bottom:18px;display:none}
+.msg.show{display:block}
+.msg.err{background:#fbe9e6;color:#9a3520;border:1px solid #e8b5ab}
+.msg.ok{background:#e8f3ea;color:#2f6b3b;border:1px solid #b7d8be}
+.hidden{display:none!important}
+.foot-note{font-size:12.5px;color:var(--ink-soft);text-align:center;margin-top:18px}
+/* account view */
+.acct-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+.acct-name{font-size:13px;letter-spacing:1px;color:var(--ink-soft)}
+.continue-bar{background:var(--sand);border-radius:8px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:8px 0 28px}
+.continue-bar p{font-size:14px;color:var(--ink);font-weight:400}
+.continue-bar a{width:auto;padding:11px 22px}
+.enq{border:1px solid rgba(26,22,20,.1);border-radius:8px;padding:18px 20px;margin-bottom:14px;background:var(--bone-light)}
+.enq-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.enq-pkg{font-family:var(--serif);font-size:20px}
+.enq-date{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--terracotta)}
+.enq-meta{font-size:13.5px;color:var(--ink-soft)}
+.enq-notes{font-size:13.5px;color:var(--ink-soft);margin-top:8px;font-style:italic}
+.empty{color:var(--ink-soft);font-size:14.5px;background:var(--bone-light);border:1px dashed rgba(26,22,20,.2);border-radius:8px;padding:24px;text-align:center}
+.logout{width:auto;padding:10px 18px;font-size:11.5px}
+.setup-warn{background:#fff6e8;border:1px solid #f0d9a8;color:#7a5a16;border-radius:8px;padding:16px 18px;font-size:13.5px;margin-bottom:22px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><defs><g id="arivamark">
+  <path d="M50 8 L80 82 Q50 68 20 82 Z" fill="none" stroke="currentColor" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/>
+</g></defs></svg>
+
+<div class="topbar">
+  <a href="ariva-website.html" class="logo" aria-label="ariva home">
+    <svg class="logo-mark" viewBox="0 0 100 100" style="color:var(--terracotta)"><use href="#arivamark"/></svg>
+    <span class="logo-word">ariva</span>
+  </a>
+  <a href="ariva-website.html" class="back">← Back to site</a>
+</div>
+
+<div class="wrap">
+
+  <!-- ===================== LOGGED-OUT: LOGIN / REGISTER ===================== -->
+  <div class="card" id="authCard">
+    <span class="eyebrow">Your Account</span>
+    <h1>Welcome to ARIVA</h1>
+    <p class="sub">Sign in or create a free account to send and track your booking enquiries.</p>
+
+    <div class="setup-warn hidden" id="setupWarn">
+      <strong>Not connected yet.</strong> The site owner needs to paste their Supabase keys into <code>supabase-config.js</code> (see README).
+    </div>
+
+    <div class="msg" id="authMsg"></div>
+
+    <button class="btn btn-google" id="googleBtn" type="button">
+      <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.4 29.3 35 24 35c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 5.1 29.5 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.4-.2-2.8-.4-4.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.5 5.1 29.5 3 24 3 16 3 9.1 7.6 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.2 0 10-2 13.6-5.2l-6.3-5.3C29.2 35.9 26.7 37 24 37c-5.3 0-9.7-2.6-11.3-7l-6.5 5C9.1 42.3 16 45 24 45z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4 5.5l6.3 5.3C41.4 36 45 30.6 45 24c0-1.4-.2-2.8-.4-4.5z"/></svg>
+      Continue with Google
+    </button>
+
+    <div class="divider">or</div>
+
+    <div class="tabs">
+      <button id="tabLogin" class="active" type="button">Log in</button>
+      <button id="tabRegister" type="button">Register</button>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm">
+      <div class="field"><label for="loginEmail">Email</label><input type="email" id="loginEmail" placeholder="you@email.com" required></div>
+      <div class="field"><label for="loginPass">Password</label><input type="password" id="loginPass" placeholder="Your password" required></div>
+      <button type="submit" class="btn btn-primary">Log in</button>
+    </form>
+
+    <!-- REGISTER FORM -->
+    <form id="registerForm" class="hidden">
+      <div class="field"><label for="regName">Your Name</label><input type="text" id="regName" placeholder="Full name" required></div>
+      <div class="field"><label for="regEmail">Email</label><input type="email" id="regEmail" placeholder="you@email.com" required></div>
+      <div class="field"><label for="regPass">Password</label><input type="password" id="regPass" placeholder="At least 6 characters" minlength="6" required></div>
+      <button type="submit" class="btn btn-ink">Create account</button>
+    </form>
+
+    <p class="foot-note">By continuing you agree to be contacted about your enquiry.</p>
+  </div>
+
+  <!-- ===================== LOGGED-IN: ACCOUNT ===================== -->
+  <div class="card wide hidden" id="acctCard">
+    <div class="acct-head">
+      <div>
+        <span class="eyebrow">Your Account</span>
+        <h1 id="acctHello">Hello</h1>
+        <div class="acct-name" id="acctEmail"></div>
+      </div>
+      <button class="btn btn-outline logout" id="logoutBtn" type="button">Log out</button>
+    </div>
+
+    <div class="continue-bar hidden" id="continueBar">
+      <p>You're logged in. Ready to finish your enquiry?</p>
+      <a href="ariva-website.html#book" class="btn btn-ink">Continue to booking →</a>
+    </div>
+
+    <h3 style="margin:22px 0 14px;font-size:22px">Your booking enquiries</h3>
+    <div id="enqList"><p class="empty">Loading…</p></div>
+
+    <p class="foot-note"><a href="ariva-website.html#book" style="color:var(--terracotta)">+ Start a new enquiry</a></p>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+// ---------- Connect to Supabase (keys come from supabase-config.js) ----------
+const ready = window.SUPABASE_URL && window.SUPABASE_URL.indexOf('YOUR_')===-1;
+const supa = ready ? supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY) : null;
+
+const $ = id => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+const nextBook = params.get('next') === 'book';
+
+function showMsg(text, kind){
+  const m = $('authMsg');
+  m.textContent = text;
+  m.className = 'msg show ' + (kind||'err');
+}
+
+// ---------- Tab switching (Log in / Register) ----------
+$('tabLogin').addEventListener('click',()=>{
+  $('tabLogin').classList.add('active'); $('tabRegister').classList.remove('active');
+  $('loginForm').classList.remove('hidden'); $('registerForm').classList.add('hidden');
+});
+$('tabRegister').addEventListener('click',()=>{
+  $('tabRegister').classList.add('active'); $('tabLogin').classList.remove('active');
+  $('registerForm').classList.remove('hidden'); $('loginForm').classList.add('hidden');
+});
+
+if(!ready){
+  $('setupWarn').classList.remove('hidden');
+}
+
+// ---------- Google sign-in ----------
+$('googleBtn').addEventListener('click', async ()=>{
+  if(!supa){ showMsg('Not connected yet — owner must add Supabase keys (see README).'); return; }
+  const { error } = await supa.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: location.href }   // returns to this same account page
+  });
+  if(error) showMsg(error.message);
+});
+
+// ---------- Email + password register ----------
+$('registerForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  if(!supa){ showMsg('Not connected yet — owner must add Supabase keys (see README).'); return; }
+  const { data, error } = await supa.auth.signUp({
+    email: $('regEmail').value,
+    password: $('regPass').value,
+    options: { data: { full_name: $('regName').value } }
+  });
+  if(error){ showMsg(error.message); return; }
+  if(data.session){
+    render();                                  // email confirmation is OFF — logged in straight away
+  } else {
+    showMsg('Account created! Please check your email to confirm, then log in.', 'ok');
+  }
+});
+
+// ---------- Email + password login ----------
+$('loginForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  if(!supa){ showMsg('Not connected yet — owner must add Supabase keys (see README).'); return; }
+  const { error } = await supa.auth.signInWithPassword({
+    email: $('loginEmail').value,
+    password: $('loginPass').value
+  });
+  if(error){ showMsg(error.message); return; }
+  render();
+});
+
+// ---------- Logout ----------
+$('logoutBtn').addEventListener('click', async ()=>{
+  if(supa) await supa.auth.signOut();
+  render();
+});
+
+// ---------- Escape HTML (safety when showing saved text) ----------
+function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+// ---------- Load this user's enquiries ----------
+async function loadEnquiries(){
+  const list = $('enqList');
+  const { data, error } = await supa.from('enquiries').select('*').order('created_at', { ascending:false });
+  if(error){ list.innerHTML = '<p class="empty">Could not load enquiries: '+esc(error.message)+'</p>'; return; }
+  if(!data || !data.length){
+    list.innerHTML = '<p class="empty">No enquiries yet. When you send a booking enquiry from the site, it will appear here.</p>';
+    return;
+  }
+  list.innerHTML = data.map(r=>{
+    const when = r.created_at ? new Date(r.created_at).toLocaleDateString() : '';
+    return '<div class="enq">'
+      + '<div class="enq-top"><span class="enq-pkg">'+esc(r.package||'Enquiry')+'</span><span class="enq-date">'+esc(when)+'</span></div>'
+      + '<div class="enq-meta">Event date: '+esc(r.event_date||'—')+' · Guests: '+esc(r.guests||'—')+' · Pincode: '+esc(r.pincode||'—')+'</div>'
+      + (r.notes ? '<div class="enq-notes">"'+esc(r.notes)+'"</div>' : '')
+      + '</div>';
+  }).join('');
+}
+
+// ---------- Decide which view to show ----------
+async function render(){
+  if(!supa){ $('authCard').classList.remove('hidden'); $('acctCard').classList.add('hidden'); return; }
+  const { data:{ session } } = await supa.auth.getSession();
+  if(session){
+    const u = session.user;
+    const name = (u.user_metadata && (u.user_metadata.full_name || u.user_metadata.name)) || u.email;
+    $('acctHello').textContent = 'Hello, ' + name;
+    $('acctEmail').textContent = u.email;
+    if(nextBook) $('continueBar').classList.remove('hidden');
+    $('authCard').classList.add('hidden');
+    $('acctCard').classList.remove('hidden');
+    loadEnquiries();
+  } else {
+    $('authCard').classList.remove('hidden');
+    $('acctCard').classList.add('hidden');
+  }
+}
+
+// React to login/logout (incl. returning from Google)
+if(supa) supa.auth.onAuthStateChange(()=>render());
+render();
+</script>
+</body>
+</html>
