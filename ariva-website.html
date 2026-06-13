@@ -40,10 +40,12 @@ section{padding:96px 0}
 .logo-mark{width:30px;height:30px;flex-shrink:0}
 .logo-word{font-family:var(--sans);font-weight:500;font-size:25px;letter-spacing:1px;color:var(--ink);line-height:1}
 .logo-word::after{content:'.';color:var(--terracotta);font-weight:600}
+.logo-img{height:40px;width:auto;display:block}
+footer .logo-img{background:var(--bone);padding:7px 11px;border-radius:8px}
 
 /* ---------- NAV ---------- */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:all .35s ease}
-nav.scrolled{background:rgba(250,247,240,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(26,22,20,.08);padding:13px 0}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;transition:all .35s ease;background:rgba(250,247,240,.96);backdrop-filter:blur(12px)}
+nav.scrolled{box-shadow:0 1px 0 rgba(26,22,20,.08);padding:13px 0}
 .nav-inner{display:flex;align-items:center;justify-content:space-between}
 .nav-links{display:flex;gap:30px;align-items:center;list-style:none}
 .nav-links a{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;font-weight:400;color:var(--ink);transition:color .25s}
@@ -329,8 +331,7 @@ footer .logo-word{color:var(--bone)}
 <nav id="nav">
   <div class="wrap nav-inner">
     <a href="#top" class="logo" aria-label="ariva home">
-      <svg class="logo-mark" viewBox="0 0 100 100" style="color:var(--terracotta)"><use href="#arivamark"/></svg>
-      <span class="logo-word">ariva</span>
+      <img class="logo-img" src="assets/logo.png" alt="ariva">
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#story">Our Story</a></li>
@@ -800,8 +801,7 @@ footer .logo-word{color:var(--bone)}
     <div class="foot-grid">
       <div>
         <a href="#top" class="logo" aria-label="ariva home">
-          <svg class="logo-mark" viewBox="0 0 100 100" style="color:var(--terracotta)"><use href="#arivamark"/></svg>
-          <span class="logo-word">ariva</span>
+          <img class="logo-img" src="assets/logo.png" alt="ariva">
         </a>
         <p style="margin-top:14px;max-width:300px">Mobile live kitchen · Hyderabad · est. 2026<br>The live kitchen comes to you.</p>
       </div>
